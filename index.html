@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestor de Calificaciones</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <main class="card">
+    <h1>📘 Seguimiento de Calificaciones</h1>
+
+    <div id="promedio" class="promedio-box">
+      <i class="fas fa-chart-bar"></i> Promedio: No Disponible
+    </div>
+
+    <form id="formulario">
+      <div class="input-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" id="nombre">
+        <span class="error" id="error-nombre"></span>
+      </div>
+
+      <div class="input-group">
+        <label for="apellido">Apellido</label>
+        <input type="text" name="apellido" id="apellido">
+        <span class="error" id="error-apellido"></span>
+      </div>
+
+      <div class="input-group">
+        <label for="nota">Calificación (1.0 - 7.0)</label>
+        <input type="number" name="nota" id="nota" step="0.1">
+        <span class="error" id="error-nota"></span>
+      </div>
+
+      <button type="submit"><i class="fas fa-user-plus"></i> Agregar</button>
+    </form>
+
+    <div class="tabla-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Nota</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-estudiantes"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
