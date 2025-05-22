@@ -1,13 +1,13 @@
 const formulario = document.getElementById('formulario');
 const tabla = document.getElementById('tabla-estudiantes');
 const promedioBox = document.getElementById('promedio');
-let calificaciones = [];
 
-// Solo letras y espacios
+let calificaciones = [];
+let filaEditando = null; // Guarda la fila que se está editando
+
 const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
 
-// Validación dinámica mientras escribe
-['nombre', 'apellido', 'nota'].forEach(id => {
+['nombre', 'apellido', 'nota', 'fecha'].forEach(id => {
   const input = document.getElementById(id);
   input.addEventListener('input', () => {
     document.getElementById(`error-${id}`).textContent = '';
@@ -17,72 +17,110 @@ const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
 
 formulario.addEventListener('submit', function (e) {
   e.preventDefault();
-
-  // Limpiar errores previos
-  document.querySelectorAll('.error').forEach(el => el.textContent = '');
-  document.querySelectorAll('input').forEach(el => el.classList.remove('error-input'));
+  limpiarErrores();
 
   const nombre = formulario.nombre.value.trim();
   const apellido = formulario.apellido.value.trim();
   const notaStr = formulario.nota.value.trim();
+  const fecha = formulario.fecha.value;
   const nota = parseFloat(notaStr);
+
   let valido = true;
 
-  // Nombre
-  if (!nombre) {
-    mostrarError('nombre', 'Por favor, ingrese el nombre');
-    valido = false;
-  } else if (!soloLetras.test(nombre)) {
-    mostrarError('nombre', 'El nombre solo debe contener letras');
+  if (!nombre || !soloLetras.test(nombre)) {
+    mostrarError('nombre', 'Nombre inválido');
     valido = false;
   }
 
-  // Apellido
-  if (!apellido) {
-    mostrarError('apellido', 'Por favor, ingrese el apellido');
-    valido = false;
-  } else if (!soloLetras.test(apellido)) {
-    mostrarError('apellido', 'El apellido solo debe contener letras');
+  if (!apellido || !soloLetras.test(apellido)) {
+    mostrarError('apellido', 'Apellido inválido');
     valido = false;
   }
 
-  // Nota
-  if (!notaStr) {
-    mostrarError('nota', 'Por favor, ingrese una calificación');
+  if (!notaStr || isNaN(nota) || nota < 1 || nota > 7) {
+    mostrarError('nota', 'Nota debe ser un número entre 1 y 7');
     valido = false;
-  } else if (isNaN(nota)) {
-    mostrarError('nota', 'La calificación debe ser un número');
-    valido = false;
-  } else if (nota < 1) {
-    mostrarError('nota', 'El valor debe ser mayor o igual a 1.0');
-    valido = false;
-  } else if (nota > 7) {
-    mostrarError('nota', 'El valor debe ser menor o igual a 7.0');
+  }
+
+  if (!fecha) {
+    mostrarError('fecha', 'Ingrese la fecha de inscripción');
     valido = false;
   }
 
   if (!valido) return;
 
-  // Agregar fila
-  const fila = document.createElement('tr');
-  fila.innerHTML = `
-    <td>${nombre}</td>
-    <td>${apellido}</td>
-    <td>${nota.toFixed(1)}</td>
-  `;
-  tabla.appendChild(fila);
-
-  // Calcular promedio
-  calificaciones.push(nota);
-  const promedio = calificaciones.reduce((a, b) => a + b, 0) / calificaciones.length;
-  promedioBox.innerHTML = `<i class="fas fa-chart-bar"></i> Promedio: ${promedio.toFixed(1)}`;
+  if (filaEditando) {
+    // Modo edición: actualiza fila existente
+    actualizarFila(filaEditando, { nombre, apellido, nota, fecha });
+    filaEditando = null;
+  } else {
+    // Nueva fila
+    agregarEstudiante({ nombre, apellido, nota, fecha });
+  }
 
   formulario.reset();
 });
 
 function mostrarError(id, mensaje) {
-  const input = document.getElementById(id);
-  const errorSpan = document.getElementById(`error-${id}`);
-  errorSpan.textContent = mensaje;
-  input.classList.add('error-input');
+  document.getElementById(`error-${id}`).textContent = mensaje;
+  document.getElementById(id).classList.add('error-input');
+}
+
+function limpiarErrores() {
+  document.querySelectorAll('.error').forEach(e => e.textContent = '');
+  document.querySelectorAll('input').forEach(i => i.classList.remove('error-input'));
+}
+
+function agregarEstudiante({ nombre, apellido, nota, fecha }) {
+  const fila = document.createElement('tr');
+  fila.innerHTML = `
+    <td>${nombre}</td>
+    <td>${apellido}</td>
+    <td>${nota.toFixed(1)}</td>
+    <td>${fecha}</td>
+    <td>
+      <button class="editar">Editar</button>
+      <button class="eliminar">Eliminar</button>
+    </td>
+  `;
+  tabla.appendChild(fila);
+  calificaciones.push(nota);
+  actualizarPromedio();
+
+  fila.querySelector('.eliminar').addEventListener('click', () => {
+    fila.remove();
+    calificaciones = calificaciones.filter(n => n !== nota);
+    actualizarPromedio();
+  });
+
+  fila.querySelector('.editar').addEventListener('click', () => {
+    formulario.nombre.value = nombre;
+    formulario.apellido.value = apellido;
+    formulario.nota.value = nota;
+    formulario.fecha.value = fecha;
+    filaEditando = fila;
+  });
+}
+
+function actualizarFila(fila, { nombre, apellido, nota, fecha }) {
+  fila.children[0].textContent = nombre;
+  fila.children[1].textContent = apellido;
+
+  const notaAnterior = parseFloat(fila.children[2].textContent);
+  calificaciones = calificaciones.filter(n => n !== notaAnterior);
+  calificaciones.push(nota);
+
+  fila.children[2].textContent = nota.toFixed(1);
+  fila.children[3].textContent = fecha;
+  actualizarPromedio();
+}
+
+function actualizarPromedio() {
+  if (calificaciones.length === 0) {
+    promedioBox.innerHTML = `Promedio: No disponible`;
+    return;
+  }
+  const suma = calificaciones.reduce((a, b) => a + b, 0);
+  const promedio = suma / calificaciones.length;
+  promedioBox.innerHTML = `Promedio: ${promedio.toFixed(1)}`;
 }
