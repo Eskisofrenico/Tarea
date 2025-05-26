@@ -1,113 +1,88 @@
-/* ==========================================
-   VARIABLES CSS GLOBALES
-   ========================================== */
 :root {
-  /* Colores principales del tema */
-  --bg: #eef2f7;           /* Color de fondo general */
-  --card-bg: #ffffff;      /* Fondo de las tarjetas/cards */
-  --primary: #3b82f6;      /* Color primario (azul) */
-  --accent: #2563eb;       /* Color de acento (azul más oscuro) */
-  --text: #1f2937;         /* Color del texto principal */
-  
-  /* Colores de estado */
-  --success: #10b981;      /* Verde para éxito */
-  --error: #ef4444;        /* Rojo para errores */
-  --warning: #f59e0b;      /* Amarillo para advertencias */
-  
-  /* Efectos de sombra */
-  --shadow: rgba(0, 0, 0, 0.1);     /* Sombra suave */
-  --shadow-3d: rgba(0, 0, 0, 0.2);  /* Sombra más pronunciada para efecto 3D */
+  --bg: #eef2f7;
+  --card-bg: #ffffff;
+  --primary: #3b82f6;
+  --accent: #2563eb;
+  --text: #1f2937;
+  --success: #10b981;
+  --error: #ef4444;
+  --warning: #f59e0b;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --shadow-3d: rgba(0, 0, 0, 0.2);
 }
 
-/* ==========================================
-   RESET Y CONFIGURACIÓN BÁSICA
-   ========================================== */
 * {
-  box-sizing: border-box; /* Incluye padding y border en el ancho total */
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   font-family: 'Outfit', sans-serif;
-  /* Fondo con degradado radial desde azul claro a gris */
   background: radial-gradient(circle at top left, #e0ecff, #eef2f7);
   color: var(--text);
   display: flex;
-  justify-content: center; /* Centra el contenido horizontalmente */
+  justify-content: center;
   padding: 2rem;
-  min-height: 100vh; /* Altura mínima de toda la pantalla */
+  min-height: 100vh;
 }
 
-/* ==========================================
-   TARJETA PRINCIPAL (CONTENEDOR)
-   ========================================== */
 .card {
   background: var(--card-bg);
   padding: 2rem;
-  border-radius: 20px; /* Bordes muy redondeados */
-  /* Sombra múltiple para efecto de profundidad */
+  border-radius: 20px;
   box-shadow: 0 15px 35px var(--shadow), 0 5px 15px rgba(0, 0, 0, 0.05);
   max-width: 800px;
   width: 100%;
-  animation: fadeIn 0.8s ease-out; /* Animación de entrada */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+  animation: fadeIn 0.8s ease-out;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Efecto hover en la tarjeta principal */
 .card:hover {
-  transform: translateY(-5px); /* Eleva la tarjeta */
-  box-shadow: 0 20px 40px var(--shadow-3d); /* Sombra más intensa */
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px var(--shadow-3d);
 }
 
-/* ==========================================
-   TÍTULOS Y ELEMENTOS PRINCIPALES
-   ========================================== */
 h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
   text-align: center;
   color: var(--accent);
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Sombra sutil en el texto */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
-/* Caja que muestra el promedio */
 .promedio-box {
-  background: linear-gradient(135deg, #dbeafe, #bfdbfe); /* Degradado azul */
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
   color: var(--accent);
   font-weight: bold;
   padding: 1rem;
   border-radius: 12px;
   text-align: center;
   margin-bottom: 2rem;
-  animation: slideDown 0.6s ease; /* Animación de deslizamiento */
+  animation: slideDown 0.6s ease;
   box-shadow: 0 4px 10px var(--shadow);
 }
 
-/* ==========================================
-   SISTEMA DE NOTIFICACIONES
-   ========================================== */
+/* Notificaciones */
 .notificacion {
-  background: var(--success); /* Verde por defecto (éxito) */
+  background: var(--success);
   color: white;
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1rem;
   display: flex;
-  justify-content: space-between; /* Separa texto y botón de cerrar */
+  justify-content: space-between;
   align-items: center;
   animation: slideDown 0.3s ease;
 }
 
-/* Variantes de notificación por tipo */
 .notificacion.error {
-  background: var(--error); /* Rojo para errores */
+  background: var(--error);
 }
 
 .notificacion.warning {
-  background: var(--warning); /* Amarillo para advertencias */
+  background: var(--warning);
 }
 
-/* Botón X para cerrar notificaciones */
 .notificacion button {
   background: none;
   border: none;
@@ -119,18 +94,14 @@ h1 {
   height: 24px;
 }
 
-/* Clase utilidad para ocultar elementos */
 .hidden {
   display: none !important;
 }
 
-/* ==========================================
-   FORMULARIOS Y CAMPOS DE ENTRADA
-   ========================================== */
 form {
   display: flex;
-  flex-direction: column; /* Elementos en columna */
-  gap: 1.2rem; /* Espacio entre elementos */
+  flex-direction: column;
+  gap: 1.2rem;
 }
 
 .input-group {
@@ -138,56 +109,47 @@ form {
   flex-direction: column;
 }
 
-/* Etiquetas de los campos */
 label {
   font-weight: 600;
   margin-bottom: 0.4rem;
   color: var(--primary);
 }
 
-/* Estilos para todos los campos de entrada */
 input[type="text"], input[type="number"], input[type="date"] {
   padding: 0.75rem;
-  border: 1px solid #d1d5db; /* Borde gris claro */
+  border: 1px solid #d1d5db;
   border-radius: 10px;
-  transition: all 0.3s ease; /* Transición suave para cambios */
+  transition: all 0.3s ease;
   font-size: 1rem;
-  background-color: #f9fafb; /* Fondo gris muy claro */
+  background-color: #f9fafb;
 }
 
-/* Estado focus de los campos (cuando están seleccionados) */
 input:focus {
-  outline: none; /* Quita el outline por defecto */
-  border-color: var(--primary); /* Borde azul */
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3); /* Resplandor azul */
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
   background-color: white;
 }
 
-/* Mensajes de error */
 .error {
   color: var(--error);
   font-size: 0.85rem;
   margin-top: 4px;
 }
 
-/* Campo con error */
 input.error-input {
-  border-color: var(--error); /* Borde rojo */
-  box-shadow: 0 0 8px rgba(239, 68, 68, 0.3); /* Resplandor rojo */
-  background-color: #fff5f5; /* Fondo rosado muy claro */
+  border-color: var(--error);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
+  background-color: #fff5f5;
 }
 
-/* ==========================================
-   BOTONES Y CONTROLES
-   ========================================== */
 .botones-formulario {
   display: flex;
-  gap: 1rem; /* Espacio entre botones */
+  gap: 1rem;
 }
 
-/* Estilo base para todos los botones */
 button {
-  background: linear-gradient(145deg, var(--primary), var(--accent)); /* Degradado azul */
+  background: linear-gradient(145deg, var(--primary), var(--accent));
   color: white;
   padding: 0.8rem 1.2rem;
   font-size: 1rem;
@@ -196,146 +158,127 @@ button {
   cursor: pointer;
   font-weight: 600;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 8px var(--shadow); /* Sombra que da sensación de botón elevado */
-  flex: 1; /* Los botones ocupan el mismo espacio disponible */
+  box-shadow: 0 4px 8px var(--shadow);
+  flex: 1;
 }
 
-/* Efecto hover en botones */
 button:hover {
-  transform: translateY(-2px); /* Eleva el botón */
-  box-shadow: 0 6px 12px var(--shadow-3d); /* Sombra más intensa */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px var(--shadow-3d);
 }
 
-/* Efecto al hacer clic */
 button:active {
-  transform: translateY(1px); /* Hunde el botón */
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); /* Sombra interior */
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
 }
 
-/* Variantes de botones por función */
 .btn-cancelar {
-  background: linear-gradient(145deg, #6b7280, #4b5563); /* Gris */
+  background: linear-gradient(145deg, #6b7280, #4b5563);
 }
 
 .btn-eliminar {
-  background: linear-gradient(145deg, var(--error), #dc2626); /* Rojo */
+  background: linear-gradient(145deg, var(--error), #dc2626);
 }
 
 .btn-editar {
-  background: linear-gradient(145deg, var(--warning), #d97706); /* Amarillo */
-  padding: 0.4rem 0.8rem; /* Más pequeño */
+  background: linear-gradient(145deg, var(--warning), #d97706);
+  padding: 0.4rem 0.8rem;
   font-size: 0.8rem;
 }
 
-/* ==========================================
-   CONTROLES DE TABLA
-   ========================================== */
+/* Controles de tabla */
 .controles-tabla {
   display: flex;
-  justify-content: space-between; /* Separa búsqueda y estadísticas */
+  justify-content: space-between;
   align-items: center;
   margin: 2rem 0 1rem 0;
   gap: 1rem;
 }
 
-/* Campo de búsqueda */
 .busqueda {
-  position: relative; /* Para posicionar el ícono */
+  position: relative;
   flex: 1;
   max-width: 300px;
 }
 
 .busqueda input {
   width: 100%;
-  padding: 0.5rem 2.5rem 0.5rem 1rem; /* Espacio a la derecha para el ícono */
+  padding: 0.5rem 2.5rem 0.5rem 1rem;
   border: 1px solid #d1d5db;
   border-radius: 8px;
   font-size: 0.9rem;
 }
 
-/* Ícono de búsqueda */
 .busqueda i {
   position: absolute;
   right: 0.8rem;
   top: 50%;
-  transform: translateY(-50%); /* Centra verticalmente */
+  transform: translateY(-50%);
   color: #6b7280;
 }
 
-/* Contador de registros */
 .estadisticas {
   color: var(--primary);
   font-weight: 600;
   font-size: 0.9rem;
 }
 
-/* ==========================================
-   TABLA DE DATOS
-   ========================================== */
 .tabla-container {
-  overflow-x: auto; /* Scroll horizontal si es necesario */
+  overflow-x: auto;
   position: relative;
 }
 
 table {
   width: 100%;
-  border-collapse: collapse; /* Une los bordes de las celdas */
+  border-collapse: collapse;
   background-color: white;
   border-radius: 10px;
-  overflow: hidden; /* Para que el border-radius funcione */
+  overflow: hidden;
   box-shadow: 0 5px 15px var(--shadow);
 }
 
-/* Celdas de encabezado y datos */
 th, td {
   text-align: center;
   padding: 1rem;
-  border-bottom: 1px solid #e5e7eb; /* Línea separadora */
+  border-bottom: 1px solid #e5e7eb;
 }
 
-/* Encabezados de tabla */
 th {
   background: var(--primary);
   color: white;
   font-weight: bold;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-  position: sticky; /* Se mantiene fijo al hacer scroll */
+  position: sticky;
   top: 0;
-  z-index: 10; /* Por encima de otros elementos */
+  z-index: 10;
 }
 
-/* Filas alternadas (efecto cebra) */
 tr:nth-child(even) {
-  background-color: #f1f5f9; /* Gris muy claro */
+  background-color: #f1f5f9;
 }
 
-/* Efecto hover en filas */
 tr:hover {
-  background-color: #e0f2fe; /* Azul muy claro */
+  background-color: #e0f2fe;
   transition: background 0.2s ease;
 }
 
-/* Fila que se está editando */
 .fila-editando {
-  background-color: #fef3c7 !important; /* Amarillo claro */
-  border-left: 4px solid var(--warning); /* Borde izquierdo amarillo */
+  background-color: #fef3c7 !important;
+  border-left: 4px solid var(--warning);
 }
 
-/* Estado de tabla vacía */
 .tabla-vacia {
   text-align: center;
   padding: 3rem;
-  color: #6b7280; /* Gris */
+  color: #6b7280;
 }
 
-/* Ícono para tabla vacía */
 .tabla-vacia i {
   font-size: 3rem;
   margin-bottom: 1rem;
   display: block;
 }
 
-/* Contenedor de botones de acción en cada fila */
 .acciones-fila {
   display: flex;
   gap: 0.5rem;
@@ -345,23 +288,21 @@ tr:hover {
 .acciones-fila button {
   padding: 0.4rem 0.8rem;
   font-size: 0.8rem;
-  flex: none; /* No se estiran */
+  flex: none;
 }
 
-/* ==========================================
-   MODAL DE CONFIRMACIÓN
-   ========================================== */
+/* Modal */
 .modal {
-  position: fixed; /* Fijo en pantalla */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Por encima de todo */
+  z-index: 1000;
 }
 
 .modal-content {
@@ -372,12 +313,12 @@ tr:hover {
   max-width: 400px;
   width: 90%;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  animation: scaleIn 0.3s ease; /* Animación de aparición */
+  animation: scaleIn 0.3s ease;
 }
 
 .modal-content h3 {
   margin-top: 0;
-  color: var(--error); /* Título en rojo */
+  color: var(--error);
 }
 
 .modal-botones {
@@ -391,10 +332,7 @@ tr:hover {
   margin: 0;
 }
 
-/* ==========================================
-   ANIMACIONES
-   ========================================== */
-/* Entrada suave con escala */
+/* Animaciones */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -406,7 +344,6 @@ tr:hover {
   }
 }
 
-/* Deslizamiento desde arriba */
 @keyframes slideDown {
   from {
     transform: translateY(-10px);
@@ -418,7 +355,6 @@ tr:hover {
   }
 }
 
-/* Aparición con escala (para modales) */
 @keyframes scaleIn {
   from {
     transform: scale(0.9);
@@ -430,7 +366,6 @@ tr:hover {
   }
 }
 
-/* Salida suave */
 @keyframes fadeOut {
   from {
     opacity: 1;
@@ -442,40 +377,34 @@ tr:hover {
   }
 }
 
-/* Clase para aplicar animación de salida */
 .fade-out {
   animation: fadeOut 0.3s ease forwards;
 }
 
-/* ==========================================
-   DISEÑO RESPONSIVO - TABLETS
-   ========================================== */
+/* Responsive */
 @media (max-width: 768px) {
   .card {
-    padding: 1rem; /* Menos padding en móviles */
+    padding: 1rem;
     margin: 1rem;
   }
 
   h1 {
-    font-size: 1.5rem; /* Título más pequeño */
+    font-size: 1.5rem;
   }
 
-  /* Controles de tabla en columna en lugar de fila */
   .controles-tabla {
     flex-direction: column;
     align-items: stretch;
   }
 
   .busqueda {
-    max-width: none; /* Ocupa todo el ancho disponible */
+    max-width: none;
   }
 
-  /* Botones de formulario en columna */
   .botones-formulario {
     flex-direction: column;
   }
 
-  /* Acciones de fila en columna */
   .acciones-fila {
     flex-direction: column;
   }
@@ -488,7 +417,6 @@ tr:hover {
     flex-direction: column;
   }
 
-  /* Tabla más compacta */
   table {
     font-size: 0.9rem;
   }
@@ -498,15 +426,11 @@ tr:hover {
   }
 }
 
-/* ==========================================
-   DISEÑO RESPONSIVO - MÓVILES PEQUEÑOS
-   ========================================== */
 @media (max-width: 480px) {
   body {
-    padding: 0.5rem; /* Padding mínimo */
+    padding: 0.5rem;
   }
   
-  /* Elementos de interfaz más pequeños */
   input, button {
     font-size: 0.9rem;
   }
