@@ -1,67 +1,136 @@
+/* ==========================================
+   VARIABLES CSS GLOBALES
+   ========================================== */
 :root {
-  --bg: #eef2f7;
-  --card-bg: #ffffff;
-  --primary: #3b82f6;
-  --accent: #2563eb;
-  --text: #1f2937;
-  --shadow: rgba(0, 0, 0, 0.1);
-  --shadow-3d: rgba(0, 0, 0, 0.2);
+  /* Colores principales del tema */
+  --bg: #eef2f7;           /* Color de fondo general */
+  --card-bg: #ffffff;      /* Fondo de las tarjetas/cards */
+  --primary: #3b82f6;      /* Color primario (azul) */
+  --accent: #2563eb;       /* Color de acento (azul más oscuro) */
+  --text: #1f2937;         /* Color del texto principal */
+  
+  /* Colores de estado */
+  --success: #10b981;      /* Verde para éxito */
+  --error: #ef4444;        /* Rojo para errores */
+  --warning: #f59e0b;      /* Amarillo para advertencias */
+  
+  /* Efectos de sombra */
+  --shadow: rgba(0, 0, 0, 0.1);     /* Sombra suave */
+  --shadow-3d: rgba(0, 0, 0, 0.2);  /* Sombra más pronunciada para efecto 3D */
 }
 
+/* ==========================================
+   RESET Y CONFIGURACIÓN BÁSICA
+   ========================================== */
 * {
-  box-sizing: border-box;
+  box-sizing: border-box; /* Incluye padding y border en el ancho total */
 }
 
 body {
   margin: 0;
   font-family: 'Outfit', sans-serif;
+  /* Fondo con degradado radial desde azul claro a gris */
   background: radial-gradient(circle at top left, #e0ecff, #eef2f7);
   color: var(--text);
   display: flex;
-  justify-content: center;
+  justify-content: center; /* Centra el contenido horizontalmente */
   padding: 2rem;
+  min-height: 100vh; /* Altura mínima de toda la pantalla */
 }
 
+/* ==========================================
+   TARJETA PRINCIPAL (CONTENEDOR)
+   ========================================== */
 .card {
   background: var(--card-bg);
   padding: 2rem;
-  border-radius: 20px;
+  border-radius: 20px; /* Bordes muy redondeados */
+  /* Sombra múltiple para efecto de profundidad */
   box-shadow: 0 15px 35px var(--shadow), 0 5px 15px rgba(0, 0, 0, 0.05);
-  max-width: 700px;
+  max-width: 800px;
   width: 100%;
-  animation: fadeIn 0.8s ease-out;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.8s ease-out; /* Animación de entrada */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
 }
 
+/* Efecto hover en la tarjeta principal */
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px var(--shadow-3d);
+  transform: translateY(-5px); /* Eleva la tarjeta */
+  box-shadow: 0 20px 40px var(--shadow-3d); /* Sombra más intensa */
 }
 
+/* ==========================================
+   TÍTULOS Y ELEMENTOS PRINCIPALES
+   ========================================== */
 h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
   text-align: center;
   color: var(--accent);
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Sombra sutil en el texto */
 }
 
+/* Caja que muestra el promedio */
 .promedio-box {
-  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe); /* Degradado azul */
   color: var(--accent);
   font-weight: bold;
   padding: 1rem;
   border-radius: 12px;
   text-align: center;
   margin-bottom: 2rem;
-  animation: slideDown 0.6s ease;
+  animation: slideDown 0.6s ease; /* Animación de deslizamiento */
   box-shadow: 0 4px 10px var(--shadow);
 }
 
+/* ==========================================
+   SISTEMA DE NOTIFICACIONES
+   ========================================== */
+.notificacion {
+  background: var(--success); /* Verde por defecto (éxito) */
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between; /* Separa texto y botón de cerrar */
+  align-items: center;
+  animation: slideDown 0.3s ease;
+}
+
+/* Variantes de notificación por tipo */
+.notificacion.error {
+  background: var(--error); /* Rojo para errores */
+}
+
+.notificacion.warning {
+  background: var(--warning); /* Amarillo para advertencias */
+}
+
+/* Botón X para cerrar notificaciones */
+.notificacion button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+}
+
+/* Clase utilidad para ocultar elementos */
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================
+   FORMULARIOS Y CAMPOS DE ENTRADA
+   ========================================== */
 form {
   display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+  flex-direction: column; /* Elementos en columna */
+  gap: 1.2rem; /* Espacio entre elementos */
 }
 
 .input-group {
@@ -69,99 +138,263 @@ form {
   flex-direction: column;
 }
 
+/* Etiquetas de los campos */
 label {
   font-weight: 600;
   margin-bottom: 0.4rem;
   color: var(--primary);
 }
 
-input {
+/* Estilos para todos los campos de entrada */
+input[type="text"], input[type="number"], input[type="date"] {
   padding: 0.75rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid #d1d5db; /* Borde gris claro */
   border-radius: 10px;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease; /* Transición suave para cambios */
   font-size: 1rem;
-  background-color: #f9fafb;
+  background-color: #f9fafb; /* Fondo gris muy claro */
 }
 
+/* Estado focus de los campos (cuando están seleccionados) */
 input:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+  outline: none; /* Quita el outline por defecto */
+  border-color: var(--primary); /* Borde azul */
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3); /* Resplandor azul */
   background-color: white;
 }
 
+/* Mensajes de error */
 .error {
-  color: #e11d48;
+  color: var(--error);
   font-size: 0.85rem;
   margin-top: 4px;
 }
 
+/* Campo con error */
 input.error-input {
-  border-color: #e11d48;
-  box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
-  background-color: #fff5f5;
+  border-color: var(--error); /* Borde rojo */
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.3); /* Resplandor rojo */
+  background-color: #fff5f5; /* Fondo rosado muy claro */
 }
 
+/* ==========================================
+   BOTONES Y CONTROLES
+   ========================================== */
+.botones-formulario {
+  display: flex;
+  gap: 1rem; /* Espacio entre botones */
+}
+
+/* Estilo base para todos los botones */
 button {
-  background: linear-gradient(145deg, var(--primary), var(--accent));
+  background: linear-gradient(145deg, var(--primary), var(--accent)); /* Degradado azul */
   color: white;
-  padding: 0.8rem;
+  padding: 0.8rem 1.2rem;
   font-size: 1rem;
   border: none;
   border-radius: 12px;
   cursor: pointer;
   font-weight: 600;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 8px var(--shadow);
+  box-shadow: 0 4px 8px var(--shadow); /* Sombra que da sensación de botón elevado */
+  flex: 1; /* Los botones ocupan el mismo espacio disponible */
 }
 
+/* Efecto hover en botones */
 button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px var(--shadow-3d);
+  transform: translateY(-2px); /* Eleva el botón */
+  box-shadow: 0 6px 12px var(--shadow-3d); /* Sombra más intensa */
 }
 
+/* Efecto al hacer clic */
 button:active {
-  transform: translateY(1px);
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+  transform: translateY(1px); /* Hunde el botón */
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); /* Sombra interior */
 }
 
+/* Variantes de botones por función */
+.btn-cancelar {
+  background: linear-gradient(145deg, #6b7280, #4b5563); /* Gris */
+}
+
+.btn-eliminar {
+  background: linear-gradient(145deg, var(--error), #dc2626); /* Rojo */
+}
+
+.btn-editar {
+  background: linear-gradient(145deg, var(--warning), #d97706); /* Amarillo */
+  padding: 0.4rem 0.8rem; /* Más pequeño */
+  font-size: 0.8rem;
+}
+
+/* ==========================================
+   CONTROLES DE TABLA
+   ========================================== */
+.controles-tabla {
+  display: flex;
+  justify-content: space-between; /* Separa búsqueda y estadísticas */
+  align-items: center;
+  margin: 2rem 0 1rem 0;
+  gap: 1rem;
+}
+
+/* Campo de búsqueda */
+.busqueda {
+  position: relative; /* Para posicionar el ícono */
+  flex: 1;
+  max-width: 300px;
+}
+
+.busqueda input {
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 1rem; /* Espacio a la derecha para el ícono */
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+/* Ícono de búsqueda */
+.busqueda i {
+  position: absolute;
+  right: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%); /* Centra verticalmente */
+  color: #6b7280;
+}
+
+/* Contador de registros */
+.estadisticas {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* ==========================================
+   TABLA DE DATOS
+   ========================================== */
 .tabla-container {
-  margin-top: 2rem;
-  overflow-x: auto;
+  overflow-x: auto; /* Scroll horizontal si es necesario */
+  position: relative;
 }
 
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: collapse; /* Une los bordes de las celdas */
   background-color: white;
   border-radius: 10px;
-  overflow: hidden;
+  overflow: hidden; /* Para que el border-radius funcione */
   box-shadow: 0 5px 15px var(--shadow);
 }
 
+/* Celdas de encabezado y datos */
 th, td {
   text-align: center;
   padding: 1rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb; /* Línea separadora */
 }
 
+/* Encabezados de tabla */
 th {
   background: var(--primary);
   color: white;
   font-weight: bold;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  position: sticky; /* Se mantiene fijo al hacer scroll */
+  top: 0;
+  z-index: 10; /* Por encima de otros elementos */
 }
 
+/* Filas alternadas (efecto cebra) */
 tr:nth-child(even) {
-  background-color: #f1f5f9;
+  background-color: #f1f5f9; /* Gris muy claro */
 }
 
+/* Efecto hover en filas */
 tr:hover {
-  background-color: #e0f2fe;
+  background-color: #e0f2fe; /* Azul muy claro */
   transition: background 0.2s ease;
 }
 
+/* Fila que se está editando */
+.fila-editando {
+  background-color: #fef3c7 !important; /* Amarillo claro */
+  border-left: 4px solid var(--warning); /* Borde izquierdo amarillo */
+}
+
+/* Estado de tabla vacía */
+.tabla-vacia {
+  text-align: center;
+  padding: 3rem;
+  color: #6b7280; /* Gris */
+}
+
+/* Ícono para tabla vacía */
+.tabla-vacia i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* Contenedor de botones de acción en cada fila */
+.acciones-fila {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.acciones-fila button {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  flex: none; /* No se estiran */
+}
+
+/* ==========================================
+   MODAL DE CONFIRMACIÓN
+   ========================================== */
+.modal {
+  position: fixed; /* Fijo en pantalla */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Por encima de todo */
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  animation: scaleIn 0.3s ease; /* Animación de aparición */
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  color: var(--error); /* Título en rojo */
+}
+
+.modal-botones {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.modal-botones button {
+  flex: 1;
+  margin: 0;
+}
+
+/* ==========================================
+   ANIMACIONES
+   ========================================== */
+/* Entrada suave con escala */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -173,6 +406,7 @@ tr:hover {
   }
 }
 
+/* Deslizamiento desde arriba */
 @keyframes slideDown {
   from {
     transform: translateY(-10px);
@@ -184,16 +418,100 @@ tr:hover {
   }
 }
 
-@media (max-width: 600px) {
+/* Aparición con escala (para modales) */
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Salida suave */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* Clase para aplicar animación de salida */
+.fade-out {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+/* ==========================================
+   DISEÑO RESPONSIVO - TABLETS
+   ========================================== */
+@media (max-width: 768px) {
   .card {
-    padding: 1rem;
+    padding: 1rem; /* Menos padding en móviles */
+    margin: 1rem;
   }
 
   h1 {
-    font-size: 1.5rem;
+    font-size: 1.5rem; /* Título más pequeño */
   }
 
+  /* Controles de tabla en columna en lugar de fila */
+  .controles-tabla {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .busqueda {
+    max-width: none; /* Ocupa todo el ancho disponible */
+  }
+
+  /* Botones de formulario en columna */
+  .botones-formulario {
+    flex-direction: column;
+  }
+
+  /* Acciones de fila en columna */
+  .acciones-fila {
+    flex-direction: column;
+  }
+
+  .modal-content {
+    margin: 1rem;
+  }
+
+  .modal-botones {
+    flex-direction: column;
+  }
+
+  /* Tabla más compacta */
+  table {
+    font-size: 0.9rem;
+  }
+
+  th, td {
+    padding: 0.5rem;
+  }
+}
+
+/* ==========================================
+   DISEÑO RESPONSIVO - MÓVILES PEQUEÑOS
+   ========================================== */
+@media (max-width: 480px) {
+  body {
+    padding: 0.5rem; /* Padding mínimo */
+  }
+  
+  /* Elementos de interfaz más pequeños */
   input, button {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+  }
+
+  .promedio-box {
+    font-size: 0.9rem;
   }
 }

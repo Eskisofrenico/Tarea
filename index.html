@@ -1,52 +1,109 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Meta etiquetas básicas para el documento HTML -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- Título que aparece en la pestaña del navegador -->
   <title>Gestor de Calificaciones</title>
+  
+  <!-- Enlaces a hojas de estilo CSS -->
   <link rel="stylesheet" href="style.css" />
+  
+  <!-- Preconexión a Google Fonts para mejorar rendimiento -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  
+  <!-- Importación de la fuente Outfit desde Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Importación de Font Awesome para los iconos -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+  <!-- Contenedor principal de la aplicación -->
   <main class="card">
+    <!-- Título principal de la aplicación con emoji -->
     <h1>📘 Seguimiento de Calificaciones</h1>
 
+    <!-- Caja que muestra el promedio de todas las calificaciones -->
     <div id="promedio" class="promedio-box">
       <i class="fas fa-chart-bar"></i> Promedio: No Disponible
     </div>
 
+    <!-- Sistema de notificaciones para mostrar mensajes al usuario -->
+    <div id="notificacion" class="notificacion hidden">
+      <!-- Texto del mensaje de notificación -->
+      <span id="notificacion-texto"></span>
+      <!-- Botón para cerrar la notificación -->
+      <button id="cerrar-notificacion">&times;</button>
+    </div>
+
+    <!-- Formulario para agregar/editar estudiantes -->
     <form id="formulario">
+      <!-- Campo para el nombre del estudiante -->
       <div class="input-group">
         <label for="nombre">Nombre</label>
-        <input type="text" name="nombre" id="nombre">
+        <input type="text" name="nombre" id="nombre" maxlength="50">
+        <!-- Elemento para mostrar errores de validación del nombre -->
         <span class="error" id="error-nombre"></span>
       </div>
 
+      <!-- Campo para el apellido del estudiante -->
       <div class="input-group">
         <label for="apellido">Apellido</label>
-        <input type="text" name="apellido" id="apellido">
+        <input type="text" name="apellido" id="apellido" maxlength="50">
+        <!-- Elemento para mostrar errores de validación del apellido -->
         <span class="error" id="error-apellido"></span>
       </div>
 
+      <!-- Campo para la calificación (nota) del estudiante -->
       <div class="input-group">
         <label for="nota">Calificación (1.0 - 7.0)</label>
         <input type="number" name="nota" id="nota" step="0.1">
+        <!-- Elemento para mostrar errores de validación de la nota -->
         <span class="error" id="error-nota"></span>
       </div>
 
+      <!-- Campo para la fecha de inscripción -->
       <div class="input-group">
         <label for="fecha">Fecha de inscripción</label>
         <input type="date" name="fecha" id="fecha">
+        <!-- Elemento para mostrar errores de validación de la fecha -->
         <span class="error" id="error-fecha"></span>
       </div>      
       
-      <button type="submit"><i class="fas fa-user-plus"></i> Agregar</button>
+      <!-- Contenedor de botones del formulario -->
+      <div class="botones-formulario">
+        <!-- Botón principal (Agregar/Actualizar) -->
+        <button type="submit" id="btn-submit">
+          <i class="fas fa-user-plus"></i> <span id="btn-text">Agregar</span>
+        </button>
+        <!-- Botón de cancelar (solo visible al editar) -->
+        <button type="button" id="btn-cancelar" class="btn-cancelar hidden">
+          <i class="fas fa-times"></i> Cancelar
+        </button>
+      </div>
     </form>
 
+    <!-- Controles superiores de la tabla -->
+    <div class="controles-tabla">
+      <!-- Barra de búsqueda para filtrar estudiantes -->
+      <div class="busqueda">
+        <input type="text" id="buscar" placeholder="Buscar estudiante...">
+        <i class="fas fa-search"></i>
+      </div>
+      <!-- Estadísticas que muestran el total de estudiantes -->
+      <div class="estadisticas">
+        <span id="total-estudiantes">Total: 0 estudiantes</span>
+      </div>
+    </div>
+
+    <!-- Contenedor de la tabla con scroll horizontal -->
     <div class="tabla-container">
+      <!-- Tabla que muestra todos los estudiantes -->
       <table>
+        <!-- Encabezados de la tabla -->
         <thead>
           <tr>
             <th>Nombre</th>
@@ -56,11 +113,37 @@
             <th>Acción</th>
           </tr>
         </thead>
+        <!-- Cuerpo de la tabla donde se insertan los datos -->
         <tbody id="tabla-estudiantes"></tbody>
       </table>
+      
+      <!-- Mensaje que se muestra cuando no hay estudiantes registrados -->
+      <div id="tabla-vacia" class="tabla-vacia hidden">
+        <i class="fas fa-user-graduate"></i>
+        <p>No hay estudiantes registrados</p>
+      </div>
     </div>
   </main>
 
+  <!-- Modal de confirmación para eliminar estudiantes -->
+  <div id="modal-confirmacion" class="modal hidden">
+    <div class="modal-content">
+      <!-- Título del modal -->
+      <h3>¿Confirmar eliminación?</h3>
+      <!-- Pregunta de confirmación con el nombre del estudiante -->
+      <p>¿Estás seguro de que deseas eliminar a <span id="nombre-eliminar"></span>?</p>
+      
+      <!-- Botones del modal -->
+      <div class="modal-botones">
+        <!-- Botón para confirmar la eliminación -->
+        <button id="confirmar-eliminar" class="btn-eliminar">Eliminar</button>
+        <!-- Botón para cancelar la eliminación -->
+        <button id="cancelar-eliminar" class="btn-cancelar">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enlace al archivo JavaScript que contiene toda la lógica -->
   <script src="script.js"></script>
 </body>
 </html>
