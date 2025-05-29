@@ -31,7 +31,7 @@ body {
   padding: 2rem;
   border-radius: 20px;
   box-shadow: 0 15px 35px var(--shadow), 0 5px 15px rgba(0, 0, 0, 0.05);
-  max-width: 800px;
+  max-width: 900px;
   width: 100%;
   animation: fadeIn 0.8s ease-out;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -44,25 +44,69 @@ body {
 
 h1 {
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   text-align: center;
   color: var(--accent);
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/*  Contenedor de estadísticas */
+.estadisticas-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.estadistica-box {
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: bold;
+  animation: slideDown 0.6s ease;
+  box-shadow: 0 4px 10px var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
 }
 
 .promedio-box {
   background: linear-gradient(135deg, #dbeafe, #bfdbfe);
   color: var(--accent);
-  font-weight: bold;
-  padding: 1rem;
-  border-radius: 12px;
-  text-align: center;
-  margin-bottom: 2rem;
-  animation: slideDown 0.6s ease;
-  box-shadow: 0 4px 10px var(--shadow);
 }
 
-/* Notificaciones */
+.examen-box {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  color: #92400e;
+}
+
+.eximido-box {
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+  color: #065f46;
+}
+
+/* 🟢 Estado */
+.estado {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.estado-eximido {
+  background: var(--success);
+  color: white;
+}
+
+.estado-examen {
+  background: var(--warning);
+  color: white;
+}
+
+/*  Notificaciones */
 .notificacion {
   background: var(--success);
   color: white;
@@ -98,6 +142,7 @@ h1 {
   display: none !important;
 }
 
+/*  Formulario */
 form {
   display: flex;
   flex-direction: column;
@@ -186,7 +231,7 @@ button:active {
   font-size: 0.8rem;
 }
 
-/* Controles de tabla */
+/*  Controles de tabla */
 .controles-tabla {
   display: flex;
   justify-content: space-between;
@@ -223,6 +268,7 @@ button:active {
   font-size: 0.9rem;
 }
 
+/*  Tabla */
 .tabla-container {
   overflow-x: auto;
   position: relative;
@@ -291,7 +337,7 @@ tr:hover {
   flex: none;
 }
 
-/* Modal */
+/*  Modal */
 .modal {
   position: fixed;
   top: 0;
@@ -332,7 +378,7 @@ tr:hover {
   margin: 0;
 }
 
-/* Animaciones */
+/*  Animaciones */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -366,22 +412,7 @@ tr:hover {
   }
 }
 
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-}
-
-.fade-out {
-  animation: fadeOut 0.3s ease forwards;
-}
-
-/* Responsive */
+/* 📱 Responsive */
 @media (max-width: 768px) {
   .card {
     padding: 1rem;
@@ -390,6 +421,10 @@ tr:hover {
 
   h1 {
     font-size: 1.5rem;
+  }
+
+  .estadisticas-container {
+    grid-template-columns: 1fr;
   }
 
   .controles-tabla {
@@ -423,19 +458,5 @@ tr:hover {
 
   th, td {
     padding: 0.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  body {
-    padding: 0.5rem;
-  }
-  
-  input, button {
-    font-size: 0.9rem;
-  }
-
-  .promedio-box {
-    font-size: 0.9rem;
   }
 }
